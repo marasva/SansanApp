@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">SansanApp</string>
+    <string name="aula">Aula</string>
+    <string name="mail">Correo</string>
+    <string name="comida">Comida</string>
+    <string name="mapa">Mapa</string>
+    <string name="resbib">Reservas     biblioteca</string>
+    <string name="resdep">Reservas     deportivas</string>
 </resources>
