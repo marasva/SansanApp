@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "528922634246",
+    "firebase_url": "https://sansanapp-3a325.firebaseio.com",
+    "project_id": "sansanapp-3a325",
+    "storage_bucket": "sansanapp-3a325.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528922634246:android:7d50b3253197f043",
+        "android_client_info": {
+          "package_name": "sansanapp.aplicacionesm.usm.cl.sansanapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528922634246-cdep9vg5qrtergt5jhh8bi1miur80c4i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sansanapp.aplicacionesm.usm.cl.sansanapp",
+            "certificate_hash": "a43032df8bfe4e26484f4fe22e523ed9b082a699"
+          }
+        },
+        {
+          "client_id": "528922634246-ggmv1n42e53oktefilhss5duf744lat4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhj9Grm_Nukx0X5KLTe5kGESsXNCDyw9Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "528922634246-ggmv1n42e53oktefilhss5duf744lat4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
