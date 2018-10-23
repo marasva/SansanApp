@@ -15,6 +15,9 @@ public class TabActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_main);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         Log.d(TAG,"onCreate: Starting");
 
@@ -36,6 +39,11 @@ public class TabActivity extends AppCompatActivity {
         adapter.addFragment(new KioskoTabFragment(),"Kiosko");
         adapter.addFragment(new EdificioPFragment(),"Edificio P");
         viewPager.setAdapter(adapter);
+    }
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 
 }

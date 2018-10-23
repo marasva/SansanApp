@@ -1,18 +1,115 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:ads="http://schemas.android.com/apk/res-auto"
+android:background="#fcfcfc">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/comida"
+        android:layout_width="136dp"
+        android:layout_height="130dp"
+        android:layout_below="@+id/aula"
+        android:layout_alignStart="@+id/aula"
+        android:layout_alignLeft="@+id/aula"
+        android:layout_marginTop="17dp"
+        android:background="?attr/colorPrimary"
+        android:clickable="true"
+        android:drawableTop="@drawable/silverware_fork_knife"
+        android:text="Comida"
+        android:textColor="#FCFCFD" />
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/mail"
+        android:layout_width="136dp"
+        android:layout_height="128dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="?attr/colorPrimary"
+        android:clickable="true"
+        android:drawableTop="@drawable/email"
+        android:focusable="true"
+        android:text="Correo"
+        android:textColor="#FCFCFD"
+         />
+
+    <Button
+        android:id="@+id/resbib"
+        android:layout_width="136dp"
+        android:layout_height="128dp"
+        android:layout_below="@+id/comida"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginBottom="11dp"
+        android:layout_toStartOf="@+id/resdep"
+        android:layout_toLeftOf="@+id/resdep"
+        android:background="?attr/colorPrimary"
+        android:clickable="true"
+        android:drawableTop="@drawable/book_open_variant1"
+        android:focusable="true"
+        android:text="Reservas     biblioteca"
+        android:textColor="#FCFCFD" />
+
+    <Button
+        android:id="@+id/mapa"
+        android:layout_width="136dp"
+        android:layout_height="128dp"
+        android:layout_below="@+id/mail"
+        android:layout_alignStart="@+id/mail"
+        android:layout_alignLeft="@+id/mail"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="?attr/colorPrimary"
+        android:clickable="true"
+        android:drawableTop="@drawable/map"
+        android:focusable="true"
+        android:text="Mapa"
+        android:textColor="#FCFCFD" />
+
+    <Button
+        android:id="@+id/aula"
+        android:layout_width="136dp"
+        android:layout_height="128dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="19dp"
+        android:background="?attr/colorPrimary"
+        android:clickable="true"
+        android:drawableTop="@drawable/icons8_centro_de_estudiantes_60"
+        android:focusable="true"
+        android:text="Aula"
+        android:textColor="#FCFCFD" />
+
+    <Button
+        android:id="@+id/resdep"
+        android:layout_width="136dp"
+        android:layout_height="128dp"
+        android:layout_below="@+id/mapa"
+        android:layout_alignStart="@+id/mapa"
+        android:layout_alignLeft="@+id/mapa"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginBottom="11dp"
+        android:background="?attr/colorPrimary"
+        android:clickable="true"
+        android:drawableTop="@drawable/basketball1"
+        android:focusable="true"
+        android:text="Reservas   deportivas"
+        android:textColor="#FCFCFD" />
+
+</RelativeLayout>

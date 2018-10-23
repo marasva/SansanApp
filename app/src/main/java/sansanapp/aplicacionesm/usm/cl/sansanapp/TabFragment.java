@@ -87,7 +87,6 @@ public class TabFragment extends Fragment {
 
                 for (int i = 0; i < 5 ; i++) {
                     String header = allMenuList.get(i).get(1).toString();
-                    System.out.println(allMenuList.get(i));
                     allMenuList.get(i).remove(0);
                     allMenuList.get(i).remove(0);
                     listHash.put(header,allMenuList.get(i));
