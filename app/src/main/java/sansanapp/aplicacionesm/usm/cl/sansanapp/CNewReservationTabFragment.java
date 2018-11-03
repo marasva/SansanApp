@@ -2,6 +2,7 @@ package sansanapp.aplicacionesm.usm.cl.sansanapp;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -46,12 +47,17 @@ import static sansanapp.aplicacionesm.usm.cl.sansanapp.R.id.startTimeSpinner;
 public class CNewReservationTabFragment extends Fragment {
     private static final String TAG = "Tab1Fragment";
 
-    private Button btnTEST;
+
+    private Button showButton;
+    private Button bookButton;
 
     //listView
     private ListView newCampoList;
+    private ListView newCampoListwoRB;
     ArrayList<String> listItems;
-    ArrayAdapter<String> adapter;
+    ArrayAdapter<String> listAdapter;
+    ArrayAdapter<String> listAdapterwoRB;
+
 
     // Database
     private DatabaseReference mDatabase;
@@ -61,6 +67,7 @@ public class CNewReservationTabFragment extends Fragment {
     TimePickerDialog endTimePicker;
     EditText startTimeText;
     EditText endTimeText;
+    EditText endTimeManip;
 
     // datePicker view
     DatePickerDialog datePickerDialog;
@@ -72,53 +79,32 @@ public class CNewReservationTabFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.campo_new_tab_fragment,container,false);
-        btnTEST = (Button) view.findViewById(R.id.campoButton);
+        showButton = (Button) view.findViewById(R.id.campoButton);
+        bookButton = (Button) view.findViewById(R.id.bookButton);
 
         // Creating the list in the end of the view
         newCampoList = (ListView) view.findViewById(R.id.newCampoList);
+        newCampoListwoRB = (ListView) view.findViewById(R.id.newCampoListwoRB);
         listItems = new ArrayList<String>();
-        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listItems);
-        newCampoList.setAdapter(adapter);
+        listAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_single_choice, listItems);
+        listAdapterwoRB = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listItems);
+        newCampoList.setAdapter(listAdapter);
+        newCampoListwoRB.setAdapter(listAdapterwoRB);
 
         //datetime
-        //  dateTimeView = (TextView) view.findViewById(R.id.dateTimeView);
-//        simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm",Locale.ROOT);
-        //      Date = simpleDateFormat.format(calendar.getTime());
         datePickerText =(EditText) view.findViewById(R.id.datePicker);
 
         // starTime
         startTimeText =(EditText) view.findViewById(R.id.startTimeText);
         endTimeText = (EditText) view.findViewById(R.id.endTimeText);
+        endTimeManip = (EditText) view.findViewById(R.id.endTimeManip);
 
-        final List<String> values = new ArrayList<String>();
+
+        // StringBuilder of the results from the different editTexts
         final StringBuilder result = new StringBuilder();
         // temporary solutions with only using the String Array, because the frickin Firebase list
         // is not working
         final String[] fieldNames={"Football","Basketball","Tennis"};
-
-        /*
-        // Firebase database
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("fields").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    values.add(child.getValue(String.class));
-                    System.out.print("halo" + child.getValue(String.class));
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-        for (String value : values) {
-            System.out.println(value);
-        }
-
-*/
 
 
         // Set all the Spinnerz
@@ -128,7 +114,6 @@ public class CNewReservationTabFragment extends Fragment {
         spinnerField.setAdapter(fieldsAdapter);
         spinnerField.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), "fieldSpinner", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -166,6 +151,7 @@ public class CNewReservationTabFragment extends Fragment {
             }
         });
 
+
         // endTimePicker
         endTimeText.setInputType(InputType.TYPE_NULL);
         endTimeText.setOnClickListener(new View.OnClickListener() {
@@ -184,12 +170,14 @@ public class CNewReservationTabFragment extends Fragment {
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker tp, int sHour, int sMinute) {
-                                // made hack to get two zeros in time
+                                // made temporary hack to get two zeros in time
+                                // probably have to do something to fix the number from 00-09 :SSS
                                 if (String.valueOf(sMinute).length() == 1){
                                     endTimeText.setText(sHour + ":" + "00");
                                 }
                                 else {
                                     endTimeText.setText(sHour + ":" + sMinute);
+                                    endTimeManip.setText(sHour + ":" + (sMinute - 1));
                                 }
                             }
                         }, hour, minutes, true);
@@ -225,57 +213,48 @@ public class CNewReservationTabFragment extends Fragment {
             }
         });
 
-        btnTEST.setOnClickListener(new View.OnClickListener() {
+
+        showButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // clearing the views and stuff for when button is clicked several times
+                newCampoListwoRB.setVisibility(View.GONE);
+                newCampoList.setVisibility(View.GONE);
                 result.setLength(0);
                 listItems.clear();
-                result.append(startTimeText.getText()).append(endTimeText.getText()).append(spinnerField.getSelectedItem()).append(datePickerText.getText());
+                result.append(startTimeText.getText()).append("-").append(endTimeText.getText()).append(" ").append(spinnerField.getSelectedItem()).append(" ").append(datePickerText.getText());
 
                 final String starttoFirebase = startTimeText.getText().toString().replace(":","");
-                final String endtoFirebase = endTimeText.getText().toString().replace(":","");
+                final String endtoFirebase = endTimeManip.getText().toString().replace(":","");
                 final String datetoFirebase = datePickerText.getText().toString().replace("/","");
-                System.out.println("startFirebase" + starttoFirebase);
-
-
 
                 mDatabase = FirebaseDatabase.getInstance().getReference();
-                mDatabase.child("football").addListenerForSingleValueEvent(new ValueEventListener() {
+                mDatabase.child("football").child(datetoFirebase).orderByKey().startAt(starttoFirebase).endAt(endtoFirebase).addListenerForSingleValueEvent(new ValueEventListener() {
 
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        /*
-                        for (DataSnapshot child : dataSnapshot.child("7112018").getChildren()) {
-                            System.out.println("4db2" + child.child("isBooked").getValue(String.class));
-                            if (child.child("isBooked").getValue(String.class).equalsIgnoreCase("true")){
-                                System.out.println("true" + child.getKey());
-                            }
-                        }
-                        */
-
-                        boolean flagStart = false;
-                        boolean flagEnd = false;
+                        boolean flagStop = false;
                         List<String> getValues = new ArrayList<String>();
-                        for (DataSnapshot child : dataSnapshot.child(datetoFirebase).getChildren()) {
-                            if (child.getKey().equalsIgnoreCase(starttoFirebase) && child.child("isBooked").getValue(String.class).equalsIgnoreCase("false")){
-                                System.out.println("funStart" + child.getKey());
-                                flagStart = true;
+
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            if (child.child("isBooked").getValue(String.class).equalsIgnoreCase("true")){
+                                flagStop = true;
                             }
-                            if (child.getKey().equalsIgnoreCase(endtoFirebase) && child.child("isBooked").getValue(String.class).equalsIgnoreCase("false")){
-                                System.out.println("funEnd" + child.getKey());
-                                flagEnd = true;
+                            if (flagStop){
+                                listItems.add("There is no bookings available for this date and time period");
+                                listAdapterwoRB.notifyDataSetChanged();
+                                newCampoListwoRB.setVisibility(View.VISIBLE);
+                                break;
                             }
                         }
-                        if (!flagStart || !flagEnd) {
-                            listItems.add("There is no bookings available");
-                            adapter.notifyDataSetChanged();
-                        }
-                        else {
-                            mDatabase.child("football").child(datetoFirebase).child(starttoFirebase).child("isBooked").setValue("true");
-                            mDatabase.child("football").child(datetoFirebase).child(endtoFirebase).child("isBooked").setValue("true");
+                        if (!flagStop) {
+                            for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                mDatabase.child("football").child(datetoFirebase).child(child.getKey()).child("isBooked").setValue("true");
+                            }
                             listItems.add(result.toString());
                             System.out.println("Updated");
-                            adapter.notifyDataSetChanged();
+                            listAdapter.notifyDataSetChanged();
+                            newCampoList.setVisibility(View.VISIBLE);
                         }
                     }
 
@@ -286,30 +265,24 @@ public class CNewReservationTabFragment extends Fragment {
                 });
 
 
-                adapter.notifyDataSetChanged();
-                newCampoList.setVisibility(View.VISIBLE);
-
-
-
-
             }
         });
 
+        newCampoList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                bookButton.setVisibility(View.VISIBLE);
+            }
+        });
+
+        bookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(),"BOOKED",Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         return view;
     }
 }
-
- /*
-           // can add this under onDataChange
-                //working for Map entries
-                for (Map.Entry<String,String> entry : map.entrySet())
-                    System.out.println("Key = " + entry.getKey() +
-                            ", Value = " + entry.getValue());
-
-                final List<String> propertyAddressList = new ArrayList<String>();
-                GenericTypeIndicator<Map<String, String>> genericTypeIndicator = new GenericTypeIndicator<Map<String, String>>() {};
-                Map<String, String> map = dataSnapshot.getValue(genericTypeIndicator );
-                System.out.println(map);
-                 */

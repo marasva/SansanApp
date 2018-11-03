@@ -44,6 +44,14 @@
         />
 
     <EditText
+        android:id="@+id/endTimeManip"
+        android:layout_width="53dp"
+        android:layout_height="32dp"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="313dp" />
+
+    <EditText
         android:id="@+id/datePicker"
         android:layout_width="198dp"
         android:layout_height="26dp"
@@ -88,6 +96,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/splitLine_hor2" />
 
+    <Button
+        android:id="@+id/bookButton"
+        android:layout_width="316dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:elevation="2dp"
+        android:text="Book field"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newCampoList" />
+
     <TextView
         android:id="@+id/campoText"
         android:layout_width="wrap_content"
@@ -121,6 +146,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.029"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ListView
+        android:id="@+id/newCampoListwoRB"
+        android:layout_width="310dp"
+        android:layout_height="530dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/campoButton" />
 
     <TextView
         android:id="@+id/fechaText"
@@ -192,11 +231,14 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:choiceMode="singleChoice"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/campoButton" />
+        app:layout_constraintTop_toBottomOf="@+id/campoButton">
+
+    </ListView>
 
     <View
         android:id="@+id/SplitLine_hor1"
