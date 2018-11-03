@@ -5,14 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TabActivityReservationCampo">
+    tools:context=".MainActivity">
+
 
 <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/startTimeText"
+    <Spinner
+        android:id="@+id/startTimeSpinner"
         android:layout_width="248dp"
         android:layout_height="25dp"
         android:layout_marginStart="8dp"
@@ -20,15 +21,36 @@
         android:layout_marginTop="52dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:background="@drawable/spinner_border_date"
+        android:background="@drawable/spinner_border"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.178"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SplitLine_hor1"
         />
+    <View
+        android:id="@+id/SplitLine_hor1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/Black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/endTimeText"
+    <View
+        android:id="@+id/splitLine_hor2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/Black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fieldSpinner" />
+
+    <Spinner
+        android:id="@+id/endTimeSpinner"
         android:layout_width="248dp"
         android:layout_height="25dp"
         android:layout_marginStart="8dp"
@@ -36,21 +58,13 @@
         android:layout_marginTop="36dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:background="@drawable/spinner_border_date"
+        android:background="@drawable/spinner_border"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.178"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startTimeText"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/startTimeSpinner"
+    />
 
-    <EditText
-        android:id="@+id/endTimeManip"
-        android:layout_width="53dp"
-        android:layout_height="32dp"
-        android:visibility="invisible"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="313dp"
-        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/datePicker"
@@ -64,7 +78,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.178"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/endTimeText"
+        app:layout_constraintTop_toBottomOf="@+id/endTimeSpinner"
     />
 
     <Spinner
@@ -80,7 +94,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.142"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/datePicker"
+        app:layout_constraintTop_toBottomOf="@+id/datePicker" />
     />
 
     <Button
@@ -96,24 +110,6 @@
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/splitLine_hor2" />
-
-
-    <Button
-        android:id="@+id/bookButton"
-        android:layout_width="316dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:elevation="2dp"
-        android:text="Book field"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newCampoList" />
 
     <TextView
         android:id="@+id/campoText"
@@ -149,20 +145,6 @@
         app:layout_constraintHorizontal_bias="0.029"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ListView
-        android:id="@+id/newCampoListwoRB"
-        android:layout_width="310dp"
-        android:layout_height="530dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/campoButton" />
-
     <TextView
         android:id="@+id/fechaText"
         android:layout_width="wrap_content"
@@ -188,7 +170,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="4dp"
         android:text="Fin"
-        app:layout_constraintBottom_toTopOf="@+id/endTimeText"
+        app:layout_constraintBottom_toTopOf="@+id/endTimeSpinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.034"
         app:layout_constraintStart_toStartOf="parent" />
@@ -203,7 +185,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="4dp"
         android:text="Comienzo"
-        app:layout_constraintBottom_toTopOf="@+id/startTimeText"
+        app:layout_constraintBottom_toTopOf="@+id/startTimeSpinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
@@ -227,42 +209,17 @@
 
     <ListView
         android:id="@+id/newCampoList"
-        android:layout_width="310dp"
-        android:layout_height="530dp"
+        android:layout_width="307dp"
+        android:layout_height="255dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:choiceMode="singleChoice"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/campoButton">
-    </ListView>
-
-    <View
-        android:id="@+id/SplitLine_hor1"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="12dp"
-        android:background="@color/Black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/splitLine_hor2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/Black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fieldSpinner" />
-
+        app:layout_constraintTop_toBottomOf="@+id/campoButton" />
 
 </android.support.constraint.ConstraintLayout>
 </ScrollView>

@@ -2,21 +2,14 @@ package sansanapp.aplicacionesm.usm.cl.sansanapp;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,34 +17,24 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TabHost;
-import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
-import static sansanapp.aplicacionesm.usm.cl.sansanapp.R.id.endTimeSpinner;
+import android.support.v4.app.Fragment;
+
+
 import static sansanapp.aplicacionesm.usm.cl.sansanapp.R.id.fieldSpinner;
-import static sansanapp.aplicacionesm.usm.cl.sansanapp.R.id.startTimeSpinner;
 
-public class CNewReservationTabFragment extends Fragment {
+public class LNewReservationTabFragment extends Fragment {
     private static final String TAG = "Tab1Fragment";
+
 
     private Button showButton;
     private Button bookButton;
@@ -62,6 +45,7 @@ public class CNewReservationTabFragment extends Fragment {
     ArrayList<String> listItems;
     ArrayAdapter<String> listAdapter;
     ArrayAdapter<String> listAdapterwoRB;
+
 
     // Database
     private DatabaseReference mDatabase;
@@ -76,6 +60,7 @@ public class CNewReservationTabFragment extends Fragment {
     // datePicker view
     DatePickerDialog datePickerDialog;
     EditText datePickerText;
+
 
 
     @Nullable
@@ -101,8 +86,6 @@ public class CNewReservationTabFragment extends Fragment {
         startTimeText =(EditText) view.findViewById(R.id.startTimeText);
         endTimeText = (EditText) view.findViewById(R.id.endTimeText);
         endTimeManip = (EditText) view.findViewById(R.id.endTimeManip);
-
-
 
 
         // StringBuilder of the results from the different editTexts
@@ -231,7 +214,9 @@ public class CNewReservationTabFragment extends Fragment {
                 result.setLength(0);
                 listItems.clear();
                 final String starttoFirebase = startTimeText.getText().toString().replace(":","");
+                System.out.println("btnStartTime" + startTimeText.getText());
                 final String endtoFirebase = endTimeManip.getText().toString().replace(":","");
+                System.out.println("btnEndTime" + endtoFirebase);
                 final String datetoFirebase = datePickerText.getText().toString().replace("/","");
                 result.append(startTimeText.getText()).append("-").append(endTimeText.getText()).append(" ").append(spinnerField.getSelectedItem()).append(" ").append(datePickerText.getText());
 
@@ -255,6 +240,12 @@ public class CNewReservationTabFragment extends Fragment {
                             }
                         }
                         if (!flagStop) {
+                            /*
+                            for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                System.out.println("keys in firebase" + child.getKey());
+                                mDatabase.child("football").child(datetoFirebase).child(child.getKey()).child("isBooked").setValue("true");
+                            }
+                            */
                             listItems.add(result.toString());
                             System.out.println("Added to results");
                             listAdapter.notifyDataSetChanged();
@@ -282,33 +273,29 @@ public class CNewReservationTabFragment extends Fragment {
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 final String starttoFirebase = startTimeText.getText().toString().replace(":", "");
+                System.out.println("btnStartTime" + startTimeText.getText());
                 final String endtoFirebase = endTimeManip.getText().toString().replace(":", "");
+                System.out.println("btnEndTime" + endtoFirebase);
                 final String datetoFirebase = datePickerText.getText().toString().replace("/", "");
                 mDatabase.child("football").child(datetoFirebase).orderByKey().startAt(starttoFirebase).endAt(endtoFirebase).addListenerForSingleValueEvent(new ValueEventListener() {
 
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            System.out.println("keys in firebase" + child.getKey());
                             mDatabase.child("football").child(datetoFirebase).child(child.getKey()).child("isBooked").setValue("true");
                         }
-                        Toast.makeText(getActivity(), "Successfully booked", Toast.LENGTH_LONG).show();
-                        System.out.println("Starts new fragment");
-                        ((TabActivityReservationCampo)getActivity()).selectFragment(1);
-                        newCampoListwoRB.setVisibility(View.GONE);
-                        newCampoList.setVisibility(View.GONE);
+                        System.out.println("Updated");
                     }
-
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
                 });
-
-                // TODO: Next screen getting all the information from this screen
-                // Either make class or can probably also just get it from Firebase through the user profile
+                // TODO: next screen, probably using an intent
+                // TODO: create users
             }
         });
 

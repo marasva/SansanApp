@@ -6,10 +6,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-public class TabActivityReservationCampo extends AppCompatActivity {
+public class TabActivityReservationBiblioteca extends AppCompatActivity {
     private static final String TAG = "ActivityReservationCamp";
     private SectionsPageAdapter mSectionsPageAdapter;
-    ViewPager mViewPager;
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class TabActivityReservationCampo extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        Log.d(TAG,"onCreate: Starting");
+        Log.d(TAG, "onCreate: Starting");
 
         mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
 
@@ -36,21 +36,16 @@ public class TabActivityReservationCampo extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
     }
 
-    public void selectFragment(int position){
-        mViewPager.setCurrentItem(position, true);
-        // true is to animate the transaction
-    }
-
-    private void setupViewPager(ViewPager viewPager){
+    private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new CNewReservationTabFragment(),"Nueva reserva");
-        adapter.addFragment(new CHistoryReservationTabFragment(),"Mostrar tus reservas");
+        adapter.addFragment(new CNewReservationTabFragment(), "Nueva reserva");
+        adapter.addFragment(new CHistoryReservationTabFragment(), "Mostrar tus reservas");
         viewPager.setAdapter(adapter);
     }
+
     @Override
-    public boolean onSupportNavigateUp(){
+    public boolean onSupportNavigateUp() {
         finish();
         return true;
     }
-
 }

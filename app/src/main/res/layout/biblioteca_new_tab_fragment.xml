@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TabActivityReservationCampo">
+    tools:context=".MainActivity">
 
 <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
@@ -239,6 +239,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/campoButton">
+
     </ListView>
 
     <View
@@ -255,7 +256,7 @@
     <View
         android:id="@+id/splitLine_hor2"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:background="@color/Black"
         app:layout_constraintEnd_toEndOf="parent"
