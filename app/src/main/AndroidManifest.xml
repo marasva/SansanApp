@@ -33,6 +33,38 @@
             android:name=".MainActivity"
             android:value="MainActivity" />
         </activity>
+        <activity android:name=".LoginActivity" >
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name=".LoginActivity"
+                android:value="LoginActivity" />
+        </activity>
+        <activity android:name=".SignupActivity" >
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name=".SignupActivity"
+                android:value="SignupActivity" />
+        </activity>
+        <activity android:name=".ResetPasswordActivity" >
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name=".ResetPasswordActivity"
+                android:value="ResetPasswordActivity" />
+        </activity>
+        <activity android:name=".EmailPasswordAuthActivity" >
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name=".EmailPasswordAuthActivity"
+                android:value="EmailPasswordAuthActivity" />
+        </activity>
     </application>
 
 </manifest>
