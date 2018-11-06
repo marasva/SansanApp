@@ -23,10 +23,57 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".TabActivityReservationCampo" >
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".TabActivityReservationBiblioteca" >
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".MapsActivity" >
             <meta-data
             android:name=".MainActivity"
             android:value="MainActivity" />
+        </activity>
+        <activity android:name=".LoginActivity" >
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name=".LoginActivity"
+                android:value="LoginActivity" />
+        </activity>
+        <activity android:name=".SignupActivity" >
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name=".SignupActivity"
+                android:value="SignupActivity" />
+        </activity>
+        <activity android:name=".LoginActivityBib" >
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name=".LoginActivityBib"
+                android:value="LoginActivityBib" />
+        </activity>
+        <activity android:name=".SignupActivityBib" >
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name=".SignupActivityBib"
+                android:value="SignupActivityBib" />
+        </activity>
+        <activity android:name=".ResetPasswordActivity" >
+            <meta-data
+                android:name=".ResetPasswordActivity"
+                android:value="ResetPasswordActivity" />
         </activity>
     </application>
 </manifest>

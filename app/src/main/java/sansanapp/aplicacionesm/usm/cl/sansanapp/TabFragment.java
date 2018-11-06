@@ -56,7 +56,6 @@ public class TabFragment extends Fragment {
                 List<String> typeList = new ArrayList<>();
 
                 Document doc = Jsoup.connect("https://www.usm.cl/comunidad/servicio-de-alimentacion/").get();
-                // Possible to remove this fixing the code in the future
                 // adding days to header
                 Elements days = doc.select(".responsive-table tr:eq(0) p");
                 for (Element day : days){

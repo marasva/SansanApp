@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button mail_btn = (Button) findViewById(R.id.mail);
         Button map_btn = (Button) findViewById(R.id.mapa);
         Button comida_btn = (Button) findViewById(R.id.comida);
+        Button resdep_ntn = (Button) findViewById(R.id.resdep);
+        Button resbib_ntn = (Button) findViewById(R.id.resbib);
 
 
 
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mail_btn.setOnClickListener(this);
         map_btn.setOnClickListener(this);
         comida_btn.setOnClickListener(this);
+        resdep_ntn.setOnClickListener(this);
+        resbib_ntn.setOnClickListener(this);
 
     }
 
@@ -46,6 +50,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.comida:
                 onComida();
+                break;
+            case R.id.resdep:
+                onResdep();
+                break;
+            case R.id.resbib:
+                onResBib();
                 break;
         }
 
@@ -69,6 +79,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onMail() {
         Uri uri = Uri.parse("http://mail.sansano.usm.cl/");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
+    public void onResdep() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+    public void onResBib() {
+        Intent intent = new Intent(this, LoginActivityBib.class);
         startActivity(intent);
     }
 }
