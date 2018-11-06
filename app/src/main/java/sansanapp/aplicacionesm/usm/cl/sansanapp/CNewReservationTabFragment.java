@@ -1,5 +1,6 @@
 package sansanapp.aplicacionesm.usm.cl.sansanapp;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -7,11 +8,16 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,24 +25,38 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
-import static sansanapp.aplicacionesm.usm.cl.sansanapp.R.id.campoNewFragFieldSpinner;
+import static sansanapp.aplicacionesm.usm.cl.sansanapp.R.id.fieldSpinner;
 
-public class CNewReservationTabFragment extends Fragment {
-    private static final String TAG = "CNewReservationTabFrag";
+public class CNewReservationTabFragment extends Fragment implements Serializable {
+    private static final String TAG = "Tab1Fragment";
 
     private Button showButton;
     private Button bookButton;
@@ -79,8 +99,8 @@ public class CNewReservationTabFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.campo_new_tab_fragment,container,false);
-        showButton = (Button) view.findViewById(R.id.campoNewFragButton);
-        bookButton = (Button) view.findViewById(R.id.campoNewFragBookButton);
+        showButton = (Button) view.findViewById(R.id.campoButton);
+        bookButton = (Button) view.findViewById(R.id.bookButton);
 
         // Creating the list in the end of the view
         newCampoList = (ListView) view.findViewById(R.id.newCampoList);
@@ -93,17 +113,17 @@ public class CNewReservationTabFragment extends Fragment {
         newCampoListwoRB.setAdapter(listAdapterwoRB);
 
         //datetime
-        datePickerText =(EditText) view.findViewById(R.id.campoNewFragDatePicker);
+        datePickerText =(EditText) view.findViewById(R.id.datePicker);
 
         // starTime
-        startTimeText =(EditText) view.findViewById(R.id.campoNewFragStartTimeText);
-        endTimeText = (EditText) view.findViewById(R.id.campoNewFragEndTimeText);
-        endTimeManip = (EditText) view.findViewById(R.id.campoNewFragEndTimeManip);
-        dateManip = (EditText) view.findViewById(R.id.campoNewFragDateManip);
+        startTimeText =(EditText) view.findViewById(R.id.startTimeText);
+        endTimeText = (EditText) view.findViewById(R.id.endTimeText);
+        endTimeManip = (EditText) view.findViewById(R.id.endTimeManip);
+        dateManip = (EditText) view.findViewById(R.id.dateManip);
 
 
-        userText = (TextView) view.findViewById(R.id.campoNewFragUserText);
-        btnLogout =(Button) view.findViewById(R.id.campoNewFragLogoutButton);
+        userText = (TextView) view.findViewById(R.id.userText);
+        btnLogout =(Button) view.findViewById(R.id.logoutButton);
 
         // Firebase authentication
         firebaseAuth = FirebaseAuth.getInstance();
@@ -141,7 +161,7 @@ public class CNewReservationTabFragment extends Fragment {
 
 
         // Set all the Spinnerz
-        final Spinner spinnerField = (Spinner) view.findViewById(campoNewFragFieldSpinner);
+        final Spinner spinnerField = (Spinner) view.findViewById(fieldSpinner);
         ArrayAdapter<String> fieldsAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,fieldNames);
         fieldsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerField.setAdapter(fieldsAdapter);
@@ -353,14 +373,12 @@ public class CNewReservationTabFragment extends Fragment {
                     }
 
 
-
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
                 });
-                }
+            }
         });
 
         return view;

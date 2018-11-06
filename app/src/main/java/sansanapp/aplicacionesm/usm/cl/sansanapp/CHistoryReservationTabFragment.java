@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -47,10 +48,10 @@ public class CHistoryReservationTabFragment extends Fragment {
         View view = inflater.inflate(R.layout.campo_history_tab_fragment,container,false);
 
         newReservationHistory = (Button) view.findViewById(R.id.newReservationHistory);
-        campoHistoryList = (ListView) view.findViewById(R.id.bibHistoryList);
+        campoHistoryList = (ListView) view.findViewById(R.id.campoHistoryList);
 
-        userTextHistory = (TextView) view.findViewById(R.id.bibUserTextEmailHistory);
-        btnLogout =(Button) view.findViewById(R.id.bibLogoutButtonHistory);
+        userTextHistory = (TextView) view.findViewById(R.id.userTextEmailHistory);
+        btnLogout =(Button) view.findViewById(R.id.logoutButtonHistory);
 
         itemIdList = new ArrayList<String>();
         userObjects = new ArrayList<UserData>();
@@ -62,6 +63,7 @@ public class CHistoryReservationTabFragment extends Fragment {
         userID = user.getUid();
 
         authStateListener = new FirebaseAuth.AuthStateListener() {
+
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -72,7 +74,9 @@ public class CHistoryReservationTabFragment extends Fragment {
             }
         };
         userTextHistory.setText(user.getEmail());
+
         btnLogout.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 firebaseAuth.signOut();
@@ -82,13 +86,14 @@ public class CHistoryReservationTabFragment extends Fragment {
         });
 
         newReservationHistory.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 ((TabActivityReservationCampo)getActivity()).selectFragment(0);
             }
         });
 
-        mDatabase.child("users").child(userID).child("reservationFields").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("users").child(userID).child("reservationField").addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -97,7 +102,7 @@ public class CHistoryReservationTabFragment extends Fragment {
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     result.setLength(0);
                     String itemId = ds.getKey();
-                       UserData userData = ds.getValue(UserData.class);
+                    UserData userData = ds.getValue(UserData.class);
                     //   Toast.makeText(getActivity(), "this is the key" + userData.getReservationStartTime(), Toast.LENGTH_LONG).show();
                     //  UserData us = ds.getValue(UserData.class);
                     // make startTime string look nice
@@ -132,6 +137,20 @@ public class CHistoryReservationTabFragment extends Fragment {
                     result.append(reservationType).append("\n").append(startTime).append("-").append(endTime).append(" ").append(date);
                     itemIdList.add(itemId);
                     fillList.add(result.toString());
+
+                    for (String fill : fillList) {
+                        System.out.println("fill" + fill);
+                        Toast.makeText(getActivity(), fill, Toast.LENGTH_LONG).show();
+
+                    }
+                    for (String item : itemIdList) {
+                        System.out.println("fill" + item);
+
+                    }
+                    for (UserData user : userObjects) {
+                        System.out.println("user" + user.getReservationStartTime());
+
+                    }
                     userObjects.add(userData);
                 }
                 listAdapter = new ShowCampoHistoryAdapter(fillList,itemIdList,userObjects,getActivity());

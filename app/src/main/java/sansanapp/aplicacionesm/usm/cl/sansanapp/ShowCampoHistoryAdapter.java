@@ -62,13 +62,13 @@ public class ShowCampoHistoryAdapter extends BaseAdapter implements ListAdapter 
             view = inflater.inflate(R.layout.campo_history_list_items, null);
         }
 
+        if (fillList.isEmpty()) {
+            System.out.println("Fillist is empty");
+        }
+
         //Handle TextView and display string from your list
         TextView campoHistoryListItem =(TextView)view.findViewById(R.id.campoHistoryListItem);
         campoHistoryListItem.setText(fillList.get(position));
-
-        for (String fill : fillList){
-            System.out.println("this is the another place" + fill);
-        }
 
         Button deleteCampoHistoryListItem= (Button)view.findViewById(R.id.deleteCampoHistoryListItem);
         deleteCampoHistoryListItem.setOnClickListener(new View.OnClickListener(){
@@ -85,8 +85,8 @@ public class ShowCampoHistoryAdapter extends BaseAdapter implements ListAdapter 
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot child : dataSnapshot.getChildren()) {
-                            mDatabase.child("fields").child(reservationType).child(reservationDate).child(child.getKey()).child("isBooked").setValue("false");
-                            mDatabase.child("fields").child(reservationType).child(reservationDate).child(child.getKey()).child("isBookedBy").setValue("null");
+                            mDatabase.child(reservationType).child(reservationDate).child(child.getKey()).child("isBooked").setValue("false");
+                            mDatabase.child(reservationType).child(reservationDate).child(child.getKey()).child("isBookedBy").setValue("null");
                         }
                     }
 
@@ -96,7 +96,7 @@ public class ShowCampoHistoryAdapter extends BaseAdapter implements ListAdapter 
                     }
                 });
 
-                mDatabase.child("users").child(firebaseAuth.getUid()).child("reservationFields").child(listOfIds.get(position)).removeValue();
+                mDatabase.child("users").child(firebaseAuth.getUid()).child("reservationField").child(listOfIds.get(position)).removeValue();
 
                 userObjects.remove(position);
                 listOfIds.remove(position);
