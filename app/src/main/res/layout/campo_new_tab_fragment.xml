@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,52 +6,57 @@
     tools:context=".TabActivityReservationCampo">
 
 <android.support.constraint.ConstraintLayout
+    android:id="@+id/campo_new_tab_fragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <EditText
-        android:id="@+id/startTimeText"
-        android:layout_width="248dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:id="@+id/campoNewFragDateManip"
+        android:layout_width="53dp"
+        android:layout_height="32dp"
+        android:visibility="invisible"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="251dp"
+        tools:layout_editor_absoluteY="342dp" />
+
+    <EditText
+        android:id="@+id/campoNewFragStartTimeText"
+        android:layout_width="198dp"
+        android:layout_height="26dp"
         android:layout_marginTop="52dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="@drawable/spinner_border_date"
+        android:inputType="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.178"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SplitLine_hor1"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/SplitLine_hor1" />
 
     <EditText
-        android:id="@+id/endTimeText"
-        android:layout_width="248dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="36dp"
+        android:id="@+id/campoNewFragEndTimeText"
+        android:layout_width="198dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="@drawable/spinner_border_date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.178"
+        app:layout_constraintHorizontal_bias="0.157"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startTimeText"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/campoNewFragStartTimeText" />
 
     <EditText
-        android:id="@+id/endTimeManip"
+        android:id="@+id/campoNewFragEndTimeManip"
         android:layout_width="53dp"
         android:layout_height="32dp"
         android:visibility="invisible"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="313dp"
-        tools:ignore="MissingConstraints" />
+        tools:layout_editor_absoluteY="352dp" />
 
     <EditText
-        android:id="@+id/datePicker"
+        android:id="@+id/campoNewFragDatePicker"
         android:layout_width="198dp"
         android:layout_height="26dp"
         android:layout_marginTop="36dp"
@@ -64,15 +67,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.178"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/endTimeText"
+        app:layout_constraintTop_toBottomOf="@+id/campoNewFragEndTimeText"
     />
 
     <Spinner
-        android:id="@+id/fieldSpinner"
+        android:id="@+id/campoNewFragFieldSpinner"
         android:layout_width="248dp"
         android:layout_height="25dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
@@ -80,18 +83,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.142"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/datePicker"
-    />
+        app:layout_constraintTop_toBottomOf="@+id/campoNewFragDatePicker" />
 
     <Button
-        android:id="@+id/campoButton"
+        android:id="@+id/campoNewFragButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Mostrar Lugares"
+        android:text="Mostrar Campos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +101,7 @@
 
 
     <Button
-        android:id="@+id/bookButton"
+        android:id="@+id/campoNewFragBookButton"
         android:layout_width="316dp"
         android:layout_height="47dp"
         android:layout_marginStart="8dp"
@@ -116,35 +118,35 @@
         app:layout_constraintTop_toBottomOf="@+id/newCampoList" />
 
     <TextView
-        android:id="@+id/campoText"
+        android:id="@+id/campoNewFragTextDesc"
         android:layout_width="wrap_content"
         android:layout_height="21dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="Campo de deportes"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/areaText"
+        app:layout_constraintBottom_toTopOf="@+id/campoNewFragAreaText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/datePicker"
+        app:layout_constraintTop_toBottomOf="@+id/campoNewFragDatePicker"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/areaText"
+        android:id="@+id/campoNewFragAreaText"
         android:layout_width="wrap_content"
         android:layout_height="17dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="4dp"
         android:text="Area"
-        app:layout_constraintBottom_toTopOf="@+id/fieldSpinner"
+        app:layout_constraintBottom_toTopOf="@+id/campoNewFragFieldSpinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.029"
         app:layout_constraintStart_toStartOf="parent" />
@@ -161,19 +163,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/campoButton" />
+        app:layout_constraintTop_toBottomOf="@+id/campoNewFragButton" />
 
     <TextView
         android:id="@+id/fechaText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="4dp"
         android:text="Fecha"
-        app:layout_constraintBottom_toTopOf="@+id/datePicker"
+        app:layout_constraintBottom_toTopOf="@+id/campoNewFragDatePicker"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.029"
         app:layout_constraintStart_toStartOf="parent" />
@@ -182,28 +184,28 @@
         android:id="@+id/finText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="1dp"
         android:text="Fin"
-        app:layout_constraintBottom_toTopOf="@+id/endTimeText"
+        app:layout_constraintBottom_toTopOf="@+id/campoNewFragEndTimeText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.034"
+        app:layout_constraintHorizontal_bias="0.035"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/comienzoText"
         android:layout_width="wrap_content"
         android:layout_height="19dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="4dp"
         android:text="Comienzo"
-        app:layout_constraintBottom_toTopOf="@+id/startTimeText"
+        app:layout_constraintBottom_toTopOf="@+id/campoNewFragStartTimeText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
@@ -212,8 +214,8 @@
         android:id="@+id/horaText"
         android:layout_width="wrap_content"
         android:layout_height="17dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="1dp"
@@ -238,54 +240,50 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/campoButton">
+        app:layout_constraintTop_toBottomOf="@+id/campoNewFragButton">
     </ListView>
 
     <View
         android:id="@+id/SplitLine_hor1"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/Black"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/grey_300"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userText" />
+        app:layout_constraintTop_toBottomOf="@+id/campoNewFragUserText" />
 
     <View
         android:id="@+id/splitLine_hor2"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:layout_marginTop="8dp"
-        android:background="@color/Black"
+        android:background="@color/grey_300"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fieldSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/campoNewFragFieldSpinner" />
 
     <TextView
-        android:id="@+id/userText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:id="@+id/campoNewFragUserText"
+        android:layout_width="154dp"
+        android:layout_height="23dp"
+        android:layout_marginEnd="46dp"
+        android:layout_marginRight="46dp"
         android:text="userEmail"
+        android:textSize="12sp"
         android:visibility="visible"
-        app:layout_constraintEnd_toStartOf="@+id/logoutButton"
-        app:layout_constraintHorizontal_bias="0.243"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/campoNewFragLogoutButton"
+        app:layout_constraintTop_toBottomOf="@+id/campoNewFragLoggedText" />
 
     <Button
-        android:id="@+id/logoutButton"
-        android:layout_width="59dp"
-        android:layout_height="42dp"
+        android:id="@+id/campoNewFragLogoutButton"
+        android:layout_width="65dp"
+        android:layout_height="33dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
         android:layout_marginBottom="8dp"
         android:text="logout"
         android:textSize="8sp"
@@ -293,7 +291,20 @@
         app:layout_constraintBottom_toTopOf="@+id/SplitLine_hor1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.75" />
+
+    <TextView
+        android:id="@+id/campoNewFragLoggedText"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Logged in as:"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

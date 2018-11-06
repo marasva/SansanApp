@@ -28,6 +28,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".TabActivityReservationBiblioteca" >
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".MapsActivity" >
             <meta-data
             android:name=".MainActivity"
@@ -49,21 +54,26 @@
                 android:name=".SignupActivity"
                 android:value="SignupActivity" />
         </activity>
-        <activity android:name=".ResetPasswordActivity" >
+        <activity android:name=".LoginActivityBib" >
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+                android:name=".LoginActivityBib"
+                android:value="LoginActivityBib" />
+        </activity>
+        <activity android:name=".SignupActivityBib" >
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name=".SignupActivityBib"
+                android:value="SignupActivityBib" />
+        </activity>
+        <activity android:name=".ResetPasswordActivity" >
             <meta-data
                 android:name=".ResetPasswordActivity"
                 android:value="ResetPasswordActivity" />
-        </activity>
-        <activity android:name=".EmailPasswordAuthActivity" >
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <meta-data
-                android:name=".EmailPasswordAuthActivity"
-                android:value="EmailPasswordAuthActivity" />
         </activity>
     </application>
 

@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
     public void onResBib() {
-        Intent intent = new Intent(this, TabActivity.class);
+        Intent intent = new Intent(this, LoginActivityBib.class);
         startActivity(intent);
     }
 }
