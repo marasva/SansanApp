@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-public class CHistoryReservationTabFragment extends Fragment {
+public class LHistoryReservationTabFragment extends Fragment {
 
     private static final String TAG = "Tab1Fragment";
     private Button newReservationHistory;
@@ -32,7 +31,7 @@ public class CHistoryReservationTabFragment extends Fragment {
     private ArrayList<String> itemIdList;
     private ArrayList<String> fillList;
     private ArrayList<UserData> userObjects;
-    private ShowCampoHistoryAdapter listAdapter;
+    private ShowBibHistoryAdapter listAdapter;
     // Database
     private DatabaseReference mDatabase;
     private FirebaseAuth firebaseAuth;
@@ -45,13 +44,13 @@ public class CHistoryReservationTabFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.campo_history_tab_fragment,container,false);
+        View view = inflater.inflate(R.layout.biblioteca_history_tab_fragment,container,false);
 
-        newReservationHistory = (Button) view.findViewById(R.id.newReservationHistory);
-        campoHistoryList = (ListView) view.findViewById(R.id.campoHistoryList);
+        newReservationHistory = (Button) view.findViewById(R.id.bibReservationHistory);
+        campoHistoryList = (ListView) view.findViewById(R.id.bibHistoryList);
 
-        userTextHistory = (TextView) view.findViewById(R.id.userTextEmailHistory);
-        btnLogout =(Button) view.findViewById(R.id.logoutButtonHistory);
+        userTextHistory = (TextView) view.findViewById(R.id.bibUserTextEmailHistory);
+        btnLogout =(Button) view.findViewById(R.id.bibLogoutButtonHistory);
 
         itemIdList = new ArrayList<String>();
         userObjects = new ArrayList<UserData>();
@@ -63,7 +62,6 @@ public class CHistoryReservationTabFragment extends Fragment {
         userID = user.getUid();
 
         authStateListener = new FirebaseAuth.AuthStateListener() {
-
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -74,9 +72,7 @@ public class CHistoryReservationTabFragment extends Fragment {
             }
         };
         userTextHistory.setText(user.getEmail());
-
         btnLogout.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 firebaseAuth.signOut();
@@ -86,14 +82,13 @@ public class CHistoryReservationTabFragment extends Fragment {
         });
 
         newReservationHistory.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-                ((TabActivityReservationCampo)getActivity()).selectFragment(0);
+                ((TabActivityReservationBiblioteca)getActivity()).selectFragment(0);
             }
         });
 
-        mDatabase.child("users").child(userID).child("reservationField").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("users").child(userID).child("reservationLibrary").addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -139,7 +134,7 @@ public class CHistoryReservationTabFragment extends Fragment {
                     fillList.add(result.toString());
                     userObjects.add(userData);
                 }
-                listAdapter = new ShowCampoHistoryAdapter(fillList,itemIdList,userObjects,getActivity());
+                listAdapter = new ShowBibHistoryAdapter(fillList,itemIdList,userObjects,getActivity());
                 campoHistoryList.setAdapter(listAdapter);
             }
 
@@ -150,6 +145,3 @@ public class CHistoryReservationTabFragment extends Fragment {
         return view;
     }
 }
-
-
-

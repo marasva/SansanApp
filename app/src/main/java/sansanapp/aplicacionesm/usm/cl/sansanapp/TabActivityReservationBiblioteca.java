@@ -76,8 +76,8 @@ public class TabActivityReservationBiblioteca extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager){
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new CNewReservationTabFragment(),"Nueva reserva");
-        adapter.addFragment(new CHistoryReservationTabFragment(),"Mostra tus reservas");
+        adapter.addFragment(new LNewReservationTabFragment(),"Nueva reserva");
+        adapter.addFragment(new LHistoryReservationTabFragment(),"Mostra tus reservas");
         viewPager.setAdapter(adapter);
     }
     @Override
