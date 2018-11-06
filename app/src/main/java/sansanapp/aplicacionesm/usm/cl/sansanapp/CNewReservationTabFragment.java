@@ -189,7 +189,7 @@ public class CNewReservationTabFragment extends Fragment implements Serializable
                 int hour = 11;
                 int minutes = 00;
                 // time picker dialog
-                startTimePicker = new TimePickerDialog(getActivity(),
+                startTimePicker = new TimePickerDialog(getActivity(),R.style.MyDialogTheme,
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker tp, int sHour, int sMinute) {
@@ -219,7 +219,7 @@ public class CNewReservationTabFragment extends Fragment implements Serializable
                 int hour = 11;
                 int minutes = 30;
                 // time picker dialog
-                endTimePicker = new TimePickerDialog(getActivity(),
+                endTimePicker = new TimePickerDialog(getActivity(),R.style.MyDialogTheme,
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker tp, int sHour, int sMinute) {
@@ -255,7 +255,7 @@ public class CNewReservationTabFragment extends Fragment implements Serializable
                 int month = 10;
                 int year = 2018;
                 // date picker dialog
-                datePickerDialog = new DatePickerDialog(getActivity(),
+                datePickerDialog = new DatePickerDialog(getActivity(),R.style.MyDialogTheme,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -281,15 +281,12 @@ public class CNewReservationTabFragment extends Fragment implements Serializable
             }
         });
 
-        starttoFirebase = startTimeText.getText().toString().replace(":","");
-        endtoFirebase = endTimeManip.getText().toString().replace(":","");
-        datetoFirebase = dateManip.getText().toString().replace("/","");
-
-
-
         showButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final String starttoFirebase = startTimeText.getText().toString().replace(":","");
+                final String endtoFirebase = endTimeManip.getText().toString().replace(":","");
+                final String  datetoFirebase = dateManip.getText().toString().replace("/","");
                 // clearing the views and stuff for when button is clicked several times
                 newCampoListwoRB.setVisibility(View.GONE);
                 newCampoList.setVisibility(View.GONE);
