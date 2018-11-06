@@ -26,6 +26,9 @@ public class LoginActivityBib extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -110,5 +113,10 @@ public class LoginActivityBib extends AppCompatActivity {
                         });
             }
         });
+    }
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 }

@@ -34,6 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import static sansanapp.aplicacionesm.usm.cl.sansanapp.R.id.bibNewFragFieldSpinner;
+import static sansanapp.aplicacionesm.usm.cl.sansanapp.R.id.start;
 
 public class LNewReservationTabFragment extends Fragment {
     private static final String TAG = "LNewReservationTabFrag";
@@ -155,6 +156,7 @@ public class LNewReservationTabFragment extends Fragment {
             }
         });
 
+
         // startTimePicker
         startTimeText.setInputType(InputType.TYPE_NULL);
         startTimeText.setOnClickListener(new View.OnClickListener() {
@@ -166,10 +168,10 @@ public class LNewReservationTabFragment extends Fragment {
                 int hour = cldr.get(Calendar.HOUR_OF_DAY);
                 int minutes = cldr.get(Calendar.MINUTE);
                 */
-                int hour = 11;
-                int minutes = 00;
+                int startHour = 11;
+                int startMinute = 00;
                 // time picker dialog
-                startTimePicker = new TimePickerDialog(getActivity(),
+                startTimePicker = new TimePickerDialog(getActivity(),R.style.MyDialogTheme,
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker tp, int sHour, int sMinute) {
@@ -180,8 +182,9 @@ public class LNewReservationTabFragment extends Fragment {
                                     startTimeText.setText(sHour + ":" + sMinute);
                                 }
                             }
-                        }, hour, minutes, true);
+                        }, startHour, startMinute, true);
                 startTimePicker.show();
+
             }
         });
 
@@ -199,12 +202,20 @@ public class LNewReservationTabFragment extends Fragment {
                 int hour = 11;
                 int minutes = 30;
                 // time picker dialog
-                endTimePicker = new TimePickerDialog(getActivity(),
-                        new TimePickerDialog.OnTimeSetListener() {
+                endTimePicker = new TimePickerDialog(getActivity(),R.style.MyDialogTheme,new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker tp, int sHour, int sMinute) {
                                 // made temporary hack to get two zeros in time
                                 // probably have to do something to fix the number from 00-09 :SSS
+                                if (String.valueOf(sHour).length() == 1){
+                                    endTimeText.setText("0" + sHour + ":" + sMinute);
+                                    endTimeManip.setText("0" + (sHour - 1) + ":" + sMinute);
+                                }
+                                if (String.valueOf(sMinute).length() == 1 && String.valueOf(sHour).length() == 1){
+                                    endTimeText.setText("0" + sHour + ":" + "00");
+                                    endTimeManip.setText("0" + (sHour - 1) + ":" + "59");
+                                }
+
                                 if (String.valueOf(sMinute).length() == 1){
                                     endTimeText.setText(sHour + ":" + "00");
                                     endTimeManip.setText((sHour - 1) + ":" + "59");
@@ -235,13 +246,14 @@ public class LNewReservationTabFragment extends Fragment {
                 int month = 10;
                 int year = 2018;
                 // date picker dialog
-                datePickerDialog = new DatePickerDialog(getActivity(),
+                datePickerDialog = new DatePickerDialog(getActivity(),R.style.MyDialogTheme,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 // for making it easier to handle in HistoryReservationTabFragment
                                 if ((String.valueOf(dayOfMonth).length() == 1) && (String.valueOf(monthOfYear).length() == 1) ) {
-                                    dateManip.setText("0" +(dayOfMonth) + ("0" + (monthOfYear + 1)) + "/" + year);
+                                    System.out.println("Halo?");
+                                    dateManip.setText("0" +(dayOfMonth) + "/" + ("0" + (monthOfYear + 1)) + "/" + year);
                                 }
                                 else if ((String.valueOf(dayOfMonth).length() == 1) && (String.valueOf(monthOfYear).length() == 2) ) {
                                     dateManip.setText("0" +(dayOfMonth) + "/" + (monthOfYear + 1) + "/" + year);
@@ -261,15 +273,14 @@ public class LNewReservationTabFragment extends Fragment {
             }
         });
 
-        starttoFirebase = startTimeText.getText().toString().replace(":","");
-        endtoFirebase = endTimeManip.getText().toString().replace(":","");
-        datetoFirebase = dateManip.getText().toString().replace("/","");
-
-
 
         showButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final String starttoFirebase = startTimeText.getText().toString().replace(":","");
+                final String endtoFirebase = endTimeManip.getText().toString().replace(":","");
+                final String  datetoFirebase = dateManip.getText().toString().replace("/","");
+
                 // clearing the views and stuff for when button is clicked several times
                 newBibListwoRB.setVisibility(View.GONE);
                 newBibList.setVisibility(View.GONE);
@@ -284,6 +295,7 @@ public class LNewReservationTabFragment extends Fragment {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         boolean flagStop = false;
+
 
                         for (DataSnapshot child : dataSnapshot.getChildren()) {
                             if (child.child("isBooked").getValue(String.class).equalsIgnoreCase("true")){
